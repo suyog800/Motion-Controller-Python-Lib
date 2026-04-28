@@ -72,13 +72,71 @@ It acts as the bridge between:
 * Python 3.x
 * python-can
 * canopen
+* Linux SocketCAN support
+* CAN interface hardware
+
+This library was tested using a USB-to-CAN controller (CANAble) over SocketCAN.
+
+You may also use:
+
+* A dedicated CAN port, if your device has one
+* A Waveshare CAN HAT for Raspberry Pi
+* Any CAN adapter supported by SocketCAN
+
+Note: The motor driver CAN baud rate is fixed at 500 kbps.
 
 ### Install dependencies
 
 ```bash
 pip install python-can canopen
 ```
+Install CAN utilities
 
+On Ubuntu/Debian-based systems:
+
+sudo apt update
+sudo apt install net-tools can-utils
+
+net-tools provides utilities such as ifconfig.
+
+can-utils provides useful CAN debugging tools such as:
+
+candump
+cansend
+cansniffer
+SocketCAN Setup
+1. Check CAN interface
+
+After connecting your CAN adapter, check available network interfaces:
+
+ifconfig -a
+
+You should see an interface such as:
+
+can0
+2. Turn on CAN interface
+
+Set the CAN interface bitrate to 500 kbps and bring it up:
+
+sudo ip link set can0 type can bitrate 500000 && sudo ip link set can0 up
+3. Verify CAN traffic
+
+Use candump to monitor CAN messages:
+
+candump can0
+
+If the motor driver is connected and powered correctly, you should see periodic heartbeat messages from the motor driver.
+
+Example:
+
+can0  702   [1]  05
+
+In this example:
+
+702 indicates a heartbeat COB-ID from node ID 2
+05 commonly indicates the node is in operational state
+
+The exact node ID and state byte may vary depending on your configuration.
 ---
 
 ## Quick Start
