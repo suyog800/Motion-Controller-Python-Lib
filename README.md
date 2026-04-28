@@ -93,44 +93,48 @@ pip install python-can canopen
 Install CAN utilities
 
 On Ubuntu/Debian-based systems:
-
+```bash
 sudo apt update
 sudo apt install net-tools can-utils
-
+```
 net-tools provides utilities such as ifconfig.
 
 can-utils provides useful CAN debugging tools such as:
 
-candump
-cansend
-cansniffer
+* candump
+* cansend
+* cansniffer
+
 SocketCAN Setup
+
 1. Check CAN interface
 
 After connecting your CAN adapter, check available network interfaces:
-
+```bash
 ifconfig -a
-
+```
 You should see an interface such as:
-
+```bash
 can0
+```
 2. Turn on CAN interface
 
 Set the CAN interface bitrate to 500 kbps and bring it up:
-
+```bash
 sudo ip link set can0 type can bitrate 500000 && sudo ip link set can0 up
+```
 3. Verify CAN traffic
 
 Use candump to monitor CAN messages:
-
+```bash
 candump can0
-
+```
 If the motor driver is connected and powered correctly, you should see periodic heartbeat messages from the motor driver.
 
 Example:
-
+```bash
 can0  702   [1]  05
-
+```
 In this example:
 
 702 indicates a heartbeat COB-ID from node ID 2
