@@ -153,7 +153,7 @@ Before running the examples, install the required Python packages:
 pip install python-can canopen
 ```
 
-Bring up the CAN interface. Example for SocketCAN on Linux:
+Bring up the CAN interface using SocketCAN at the fixed motor-driver baud rate of 500 kbps:
 
 ```bash
  sudo ip link set can0 type can bitrate 500000 && sudo ip link set can0 up 
