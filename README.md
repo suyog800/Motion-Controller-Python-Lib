@@ -58,9 +58,9 @@ It acts as the bridge between:
 ## Features
 
 * CAN 2.0B communication support
-* Partial CANopen protocol implementation
+* CANopen protocol implementation
 * Abstraction over low-level CANopen operations
-* Motor control interface (enable, disable, velocity control)
+* Motor control interface (enable, disable, Position control)
 * Extensible design for additional control modes
 
 ---
@@ -94,7 +94,7 @@ pip install python-can canopen
 Bring up the CAN interface. Example for SocketCAN on Linux:
 
 ```bash
-sudo ip link set can0 up type can bitrate 1000000
+ sudo ip link set can0 type can bitrate 500000 && sudo ip link set can0 up 
 ```
 
 ### Example: Position Control
@@ -262,16 +262,12 @@ This repository is intended as:
 
 ## Future Improvements
 
-* Full CiA 402 compliance
-* Position and torque control modes
-* Diagnostic and fault handling APIs
 * Logging and debugging tools
 
 ---
 
 ## License
 
-(Add license here — MIT recommended)
 
 ---
 
